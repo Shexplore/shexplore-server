@@ -34,7 +34,6 @@ node_modules
 
 # Database
 db.json
-db.dev.json
 dev.db.sqlite
 
 # Brackets thing

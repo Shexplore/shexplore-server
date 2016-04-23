@@ -15,4 +15,6 @@ router.get('/', function (req, res, next) {
 
 router.use('/discuss', require('./discuss'))
 
+router.use('/users', require('./users'));
+
 module.exports = router;
