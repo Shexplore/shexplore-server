@@ -29,6 +29,9 @@ body header nav ul {
 body header nav ul a {
   margin-left: 10px;
 }
+body header nav ul a ::after {
+  border-bottom: 1px #000 solid;
+}
 body #body {
   border: 2px dashed #000;
   border-left: none;
