@@ -12,7 +12,14 @@ var users = require('./routes/users');
 
 var Bookshelf = require('bookshelf');
 var bookshelf = Bookshelf(knex);
+bookshelf.plugin(require('bookshelf-schema')({}));
 var app = express();
+
+var schemas = {
+  account: require('./models/account')(bookshelf)
+};
+
+schemas.project = require('./models/project')(bookshelf, schemas.account);
 
 var knex = require('knex')(app.get('env') == "development" ? require("./app/settings/db.dev.json") : require("./app/settings/db"));
 
@@ -32,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
   req.db = bookshelf;
+  req.schemas = schemas;
   next();
 });
 
@@ -49,7 +57,7 @@ app.use(function (req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  
+
 } else {
   // production error handler
   // no stacktraces leaked to user
@@ -62,6 +70,5 @@ if (app.get('env') === 'development') {
     });
   });
 }
-
 
 module.exports = app;
