@@ -3,8 +3,6 @@
 var express = require('express');
 var router = express.Router();
 
-var AccountModel = require("../models/account.js");
-
 function User(uname,password,email){
   if(password){
     // register a new user
