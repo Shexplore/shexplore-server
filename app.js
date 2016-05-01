@@ -15,6 +15,12 @@ var bookshelf = Bookshelf(knex);
 bookshelf.plugin(require('bookshelf-schema')({}));
 var app = express();
 
+var schemas = {
+  account: require('./models/account')(bookshelf)
+};
+
+schemas.project = require('./models/project')(bookshelf, schemas.account);
+
 var knex = require('knex')(app.get('env') == "development" ? require("./app/settings/db.dev.json") : require("./app/settings/db"));
 
 // view engine setup
@@ -33,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
   req.db = bookshelf;
+  req.schemas = schemas;
   next();
 });
 
