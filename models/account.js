@@ -8,6 +8,12 @@ var Relations = require('bookshelf-schema/lib/relations'),
     HasMany = Relations.HasMany;
 
 module.exports = function account(db){
+  var Badge = db.Model.extend({ tableName: 'badges' }, {
+    schema: [
+      StringField('type')
+    ]
+  });
+  
   var User = db.Model.extend({ tableName: 'users' }, {
     schema: [
       StringField('username'),
@@ -16,12 +22,6 @@ module.exports = function account(db){
       StringField('verification'),
       IntField('level'),
       HasMany(Badge)
-    ]
-  });
-
-  var Badge = db.Model.extend({ tableName: 'badges' }, {
-    schema: [
-      StringField('type')
     ]
   });
 

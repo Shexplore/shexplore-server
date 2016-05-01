@@ -7,24 +7,20 @@ var Fields = require('bookshelf-schema/lib/fields'),
 var Relations = require('bookshelf-schema/lib/relations'),
     HasMany = Relations.HasMany,
     HasOne = Relations.HasOne;
-    
-module.exports = function project(db){
-var Project = require('./project')
 
-var app = require('../app');
-var db = app.db;
+module.exports = function project(db, account){
 
-var Project = db.Model.extend({ tableName: 'projects' }, {
-  schema: [
-    StringField('name'),
-    IntField('difficulty'),
-    IntField('completion'),
-    StringField('description'),
-    StringField('git'),
-//    HasMany(require('./account').User),
-//    HasOne(require('./account').User)
-  ]
-});
+  var Project = db.Model.extend({ tableName: 'projects' }, {
+    schema: [
+      StringField('name'),
+      IntField('difficulty'),
+      IntField('completion'),
+      StringField('description'),
+      StringField('git'),
+      HasMany(account.User),
+      HasOne(account.User)
+    ]
+  });
 
-return Project;
+  return Project;
 }
