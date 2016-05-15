@@ -27,5 +27,5 @@ To make the database, do
 
 or for development
     sqlite3 dev.db.sqlite
-      //CREATE TABLE users (id INTEGER, name TEXT, verification TEXT, email TEXT, password TEXT);
+      //CREATE TABLE users (id INTEGER, username TEXT, verification TEXT, email TEXT, password TEXT, level INTEGER);
       //CREATE TABLE projects (id INTEGER, uuid TEXT, name TEXT, description TEXT, state TEXT);
