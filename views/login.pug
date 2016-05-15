@@ -1,15 +1,7 @@
 extends layout
 
-block content
-
-head
-  title
-  script(type='text/javascript').
-  body
-
-  h1 Create Your Profile
-
-  form(action='/users/profile', method='post')
+block body
+  form(action='/users/login', method='post')
     div
       label(for='username') Username:
       input#username(type='text')
@@ -20,5 +12,3 @@ head
       input(type='submit', value='Submit')
     head
       link(rel='stylesheet', type='css', href='login.css')
-
-  

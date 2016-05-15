@@ -24,7 +24,7 @@ require("./models/index.js")(knex);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 app.use(function(req,res,next){
   req.db = knex;
@@ -55,7 +55,7 @@ app.use(function (req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-
+  
 } else {
   // production error handler
   // no stacktraces leaked to user
