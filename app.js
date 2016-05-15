@@ -20,7 +20,6 @@ var knex = require('knex')({
   useNullAsDefault: true,
   debug: true
 });
-require("./models/index.js")(knex);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -55,7 +54,7 @@ app.use(function (req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  
+
 } else {
   // production error handler
   // no stacktraces leaked to user
