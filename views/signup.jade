@@ -13,12 +13,12 @@ block content
     form(action='/users/signup', method='post')
       div
         label(for='username') Username:
-        input#username(type='text')
+        input#username(type='text',name="username")
       div
         label(for='mail') Email:   
-        input#email(type='email')
+        input#email(type='email',name="email")
       div
         label(for='password') Password:
-        input#password(type='password')
+        input#password(type='password',name="password")
       div
         input(type='submit', value='Submit')
