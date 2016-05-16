@@ -1,6 +1,30 @@
 body
   font-family 'Exo 2', "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif
+
+  #body
+    margin-top 54px
   
   header
-    nav ul li
-      display block
+    nav
+      a.nav-toggle
+        font-size 1.3em
+        -webkit-touch-callout none
+        -webkit-user-select none
+        -khtml-user-select none
+        -moz-user-select none
+        -ms-user-select none
+        user-select none
+
+        &:hover
+          text-decoration none
+          cursor pointer
+          
+    .bd-navbar .nav-link
+      float none
+
+    .bd-navbar .nav-link + .nav-link
+      margin-left 0
+
+.js
+  nav
+    display none

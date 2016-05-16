@@ -1,13 +1,13 @@
-.container
-  a.navbar-brand(href='/') Shexplore
-
-  button.navbar-toggler.hidden-sm-up.pull-xs-right(data-toggle='collapse', data-target='#exCollapsingNavbar2') &#9776
-
-  nav#exCollapsingNavbar2.collapse.navbar-toggleable-xs.pull-xs-right.container
-    ul.nav.navbar-nav
-      li.nav-item.active
-        a.nav-link(href='#') Home
-      li.nav-item
-        a.nav-link(href='#') Discuss
-      li.nav-item
-        a.nav-link.btn.btn-primary-outline(href='#') Login/Signup
+header.navbar.navbar-light.navbar-static-top.bd-navbar(role='banner')
+  .clearfix
+    button.navbar-toggler.pull-xs-right.hidden-sm-up(type='button', data-toggle='collapse', data-target='#bd-main-nav') &#9776
+    a.navbar-brand.hidden-sm-up(href='/')
+      | Bootstrap
+  #bd-main-nav.collapse.navbar-toggleable-xs
+    nav.nav.navbar-nav
+      a.nav-item.nav-link(href='/') Bootstrap
+      a.nav-item.nav-link.active(href='/getting-started/introduction/') Documentation
+      a.nav-item.nav-link(href='/examples/') Examples
+      a.nav-item.nav-link(href='http://themes.getbootstrap.com') Themes
+      a.nav-item.nav-link(href='http://expo.getbootstrap.com') Expo
+      a.nav-item.nav-link(href='http://blog.getbootstrap.com') Blog
