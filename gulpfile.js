@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     stylus = require('gulp-stylus');
 
 gulp.task('compilePug', function() {
-  return gulp.src('**.jade')
+  return gulp.src('**.pug')
     .pipe(pug({
       pretty: true
     }))
@@ -13,17 +13,17 @@ gulp.task('compilePug', function() {
 });
 
 gulp.task('watchPug', function() {
-  gulp.watch('**.jade', ['compilePug']);
+  gulp.watch('views/**.pug', ['compilePug']);
 });
 
 gulp.task('compileStylus', function() {
-  return gulp.src('**.styl')
+  return gulp.src('public/stylus/**.styl')
     .pipe(stylus())
-    .pipe(gulp.dest('./'));
+    .pipe(gulp.dest('public/css'));
 });
 
 gulp.task('watchStylus', function() {
-  gulp.watch('**.styl', ['compileStylus']);
+  gulp.watch('public/stylus/**.styl', ['compileStylus']);
 });
 
 gulp.task('default', ['compilePug', 'compileStylus', 'watchPug', 'watchStylus']);
