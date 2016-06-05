@@ -5,26 +5,46 @@ var router = express.Router();
 
 var bcrypt = require('bcrypt');
 
-function User(uname,password,email,knex){
+function registerUser(uname,password,email,knex,callback){
   if(password){
     // register a new user
 //TODO generate a random verification uuid with accounts/generate
     var verification = "qwerty";
-    bcrypt.hash(password, 8, function(err, hash) {
+    bcrypt.hash(password, 10, function(err, hash) {
       if(err){
         console.log(err);
         return;
       }
       knex.insert({"username":uname,"password":hash,"email":email,"verification":verification}).into('users').then(function(){
-        console.log('added user',arguments)
-      })
+        callback();
+      }).catch(function(err){
+        callback(err);
+      });
     });
-  }else{
-    // access the current user
-    this.uname = uname;
-    
-    // wip
   }
+}
+
+function verifyUser(uname,password,knex,callback){
+  knex('users').where({
+    username: uname
+  }).select('id','verification','password').then(function(dat){
+    var data = dat[0]
+    if(data.verification != ""){
+      if(data.verification == password){
+        knex('users').where({
+          id: data.id
+        }).update({
+          "verification": ""
+        }).then(function(){
+          callback(undefined,undefined,"messages.account.activated");
+        });
+      }
+    }else{
+      bcrypt.compare(password,data.password,function(err,res){
+        callback(err,res ? uname : undefined,undefined);
+      });
+    }
+  });
 }
 
 
@@ -35,18 +55,37 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/profile', function(req, res, next) {
-  res.render("profile",{username:"unknown",level:1,badges:[],projects:[]});
+  res.render("profile",{username:req.session.username,level:1,badges:[],projects:[]});
 });
 
 router.get('/login', function(req, res, next) {
   res.render("login");
 });
 
+router.get('/checkStatus', function(req, res, next) {
+  res.send("username: "+req.session.username);
+});
+
 router.post('/login', function(req, res, next) {
+  verifyUser(req.body.username,req.body.password,req.db,function(err,username,status){
+    if(err){
+      console.log(err);
+      res.redirect('/users/checkStatus');
+      return;
+    }
+    req.session.username = username;
+    res.redirect('/users/checkStatus');
+  });
 });
 
 router.post('/signup', function(req, res, next) {
-  User(req.body.username,req.body.password,req.body.email,req.db);
+  registerUser(req.body.username,req.body.password,req.body.email,req.db,function(err){
+    if(err){
+      console.log(err);
+      return;
+    }
+    res.redirect("/users/login");
+  });
 });
 
 router.get('/signup', function(req, res, next) {

@@ -6,6 +6,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var Localization = require('./app/localization/index');
 
 var app = express();
 
@@ -21,12 +22,17 @@ var knex = require('knex')({
   debug: true
 });
 
+var session = require('express-session');
+
+var english = new Localization('en_US');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(function(req,res,next){
   req.db = knex;
+  req.localization = english
   next();
 });
 
@@ -39,6 +45,12 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  secret: 'undefined',
+  saveUninitialized:false,
+  resave:false
+}));
 
 app.use('/', routes);
 
