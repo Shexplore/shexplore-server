@@ -3,6 +3,7 @@ body {
 }
 body #body {
   margin-top: 70px;
+  padding: 10px;
 }
 body header nav a.nav-toggle {
   font-size: 1.3em;
