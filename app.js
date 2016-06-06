@@ -11,7 +11,6 @@ var Localization = require('./app/localization/index');
 var app = express();
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 
 var knex = require('knex')({
   client: 'sqlite3',
