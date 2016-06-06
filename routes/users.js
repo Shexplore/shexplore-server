@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 
 function registerUser(uname,password,email,knex,callback){
   if(password){
