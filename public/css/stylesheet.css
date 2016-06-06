@@ -10,6 +10,13 @@ align-items center,
 a {
   color: inherit;
 }
+.navbar-toggler {
+  padding-right: 0;
+}
+nav a {
+  margin: 5px 0;
+  border-bottom: 1px #ddd solid;
+}
 nav a.nav-toggle {
   font-size: 1.3em;
   -webkit-touch-callout: none;
@@ -43,6 +50,6 @@ nav a.nav-toggle:hover {
     display: flex;
   }
   header nav a {
-    margin: 0 10px;
+    margin: 0 20px;
   }
 }
