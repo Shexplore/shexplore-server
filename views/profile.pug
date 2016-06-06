@@ -9,16 +9,22 @@ head
 
   h1 Create Your Profile
 
-  form(action='/users/profile', method='post')
+  form(action='/profile/edit', method='post')
     div
       label(for='username') Username:
       input#username(type='text')
     div
-      label(for='password') Password:
-      input#password(type='password')
+      label(for='username') favorite_programming_language
+      input#username(type='text')
     div
-      input(type='submit', value='Submit')
-    head
-      link(rel='stylesheet', type='css', href='login.css')
-
-  
+      label(for='username') about_me
+      input#username(type='text')
+    div
+      label(for='username') level
+      input#username(type='text')
+    div
+      label(for='username') projects_completed
+      input#username(type='text')
+    div
+      label(for='username') age
+      input#username(type='text')

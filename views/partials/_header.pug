@@ -6,7 +6,7 @@ header.navbar.navbar-static-top.bd-navbar.container(role='banner')
     nav.nav.navbar-nav
       a.nav-item.nav-link(href='/') Home
       a.nav-item.nav-link(href='/discuss') Discuss
-      
+
       if !username
         button.btn.btn-secondary(type='button', data-toggle='modal', data-target='#loginModal') Login/Signup
 
@@ -15,11 +15,11 @@ header.navbar.navbar-static-top.bd-navbar.container(role='banner')
             .modal-content
               .modal-header
                 button.close(type='button', data-dismiss='modal', aria-label='Close')
-                  span(aria-hidden='true') &#10006;    
+                  span(aria-hidden='true') &#10006;
                 h4.modal-title Modal title
-              
+
               .modal-body
-                form(action='/login', method='post')
+                form(action='/login/login', method='post')
                   div
                     label(for='username') Username:
                     input#username(type='text',name='username')
@@ -28,9 +28,8 @@ header.navbar.navbar-static-top.bd-navbar.container(role='banner')
                     input#password(type='password',name='password')
                   div
                     input(type='submit', value='Submit')
-                
+
               .modal-footer
                 button.btn.btn-secondary(type='button', data-dismiss='modal') Close
 
                 button.btn.btn-primary(type='button') Save changes
-

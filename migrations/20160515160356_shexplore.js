@@ -13,15 +13,14 @@ exports.up = function(knex, Promise) {
       table.string('username');
       table.string('favorite_programming_language');
       table.string('about_me')
-      table.string('level')
+      table.integer('level')
       table.string('projects_completed')
       table.string('location')
-      table.string('number_of_badges')
-      table.string('how_old')
+      table.integer('age')
       table.string('real_name')
       table.string('friends')
       table.string('profile_picture')
-      table.string('other_hobbies')
+      table.string('hobbies')
       table.string('company')
       table.timestamps();
     })
