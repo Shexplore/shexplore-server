@@ -6,6 +6,10 @@ body
     padding 10px
   
   header
+//    display flex
+    align-items center
+    a
+      color inherit
     nav
       a.nav-toggle
         font-size 1.3em
@@ -25,14 +29,21 @@ body
 
     .bd-navbar .nav-link + .nav-link
       margin-left 0
+      
+  .modal-backdrop
+    z-index 2
 
 .js
   nav
     display none
     
 @media screen and (min-width: 34em)
+  header
+    > .clearfix
+      display inline-block
+    
     nav
-        display flex
-        
-        a
-            margin 0 10px
+      display flex
+  
+      a
+        margin 0 10px

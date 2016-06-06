@@ -1,11 +1,16 @@
 body {
   font-family: 'Exo 2', "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+header
 }
 body #body {
   margin-top: 70px;
   padding: 10px;
 }
-body header nav a.nav-toggle {
+align-items center,
+a {
+  color: inherit;
+}
+nav a.nav-toggle {
   font-size: 1.3em;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -14,24 +19,30 @@ body header nav a.nav-toggle {
   -ms-user-select: none;
   user-select: none;
 }
-body header nav a.nav-toggle:hover {
+nav a.nav-toggle:hover {
   text-decoration: none;
   cursor: pointer;
 }
-body header .bd-navbar .nav-link {
+.bd-navbar .nav-link {
   float: none;
 }
-body header .bd-navbar .nav-link + .nav-link {
+.bd-navbar .nav-link + .nav-link {
   margin-left: 0;
+}
+.modal-backdrop {
+  z-index: 2;
 }
 .js nav {
   display: none;
 }
 @media screen and (min-width: 34em) {
-  nav {
+  header > .clearfix {
+    display: inline-block;
+  }
+  header nav {
     display: flex;
   }
-  nav a {
+  header nav a {
     margin: 0 10px;
   }
 }

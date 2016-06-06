@@ -1,13 +1,28 @@
-header.navbar.navbar-light.navbar-static-top.bd-navbar(role='banner')
+header.navbar.navbar-static-top.bd-navbar.container(role='banner')
   .clearfix
     button.navbar-toggler.pull-xs-right.hidden-sm-up(type='button', data-toggle='collapse', data-target='#bd-main-nav') &#9776
-    a.navbar-brand.hidden-sm-up(href='/')
-      | Bootstrap
-  #bd-main-nav.collapse.navbar-toggleable-xs
+    a.navbar-brand(href='/') Shexplore
+  #bd-main-nav.collapse.navbar-toggleable-xs.pull-sm-right
     nav.nav.navbar-nav
-      a.nav-item.nav-link(href='/') Bootstrap
-      a.nav-item.nav-link.active(href='/getting-started/introduction/') Documentation
-      a.nav-item.nav-link(href='/examples/') Examples
-      a.nav-item.nav-link(href='http://themes.getbootstrap.com') Themes
-      a.nav-item.nav-link(href='http://expo.getbootstrap.com') Expo
-      a.nav-item.nav-link(href='http://blog.getbootstrap.com') Blog
+      a.nav-item.nav-link(href='/') Home
+      a.nav-item.nav-link(href='/discuss') Discuss
+      
+      if !username
+        button.btn.btn-secondary(type='button', data-toggle='modal', data-target='#loginModal') Login/Signup
+
+        #loginModal.modal.fade(tabindex='-1', aria-hidden='true')
+          .modal-dialog(role='document')
+            .modal-content
+              .modal-header
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                  span(aria-hidden='true') &#10006;    
+                h4.modal-title Modal title
+              
+              .modal-body
+                iframe(src='login')
+                
+              .modal-footer
+                button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+
+                button.btn.btn-primary(type='button') Save changes
+
