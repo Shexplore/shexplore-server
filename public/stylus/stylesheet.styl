@@ -6,18 +6,23 @@ body
     padding 10px
   
   header
-//    display flex
-    align-items center
+    padding 0 auto
     a
       color inherit
       
     .navbar-toggler
       padding-right 0
       
+      &:focus
+        outline none
+      
     nav
-      a
-        margin 5px 0
-        border-bottom 1px #ddd solid
+      button
+        display block
+        width 100%
+        
+      &:first-child
+        border none
         
       a.nav-toggle
         font-size 1.3em
@@ -47,11 +52,20 @@ body
     
 @media screen and (min-width: 34em)
   header
+    nav
+      display flex
+      width auto
+      
+      a
+        border 0
+        margin-right 10px
+      
+      .btn
+        width auto
+      
     > .clearfix
       display inline-block
     
     nav
-      display flex
-  
       a
-        margin 0 20px
+        margin auto 10px
