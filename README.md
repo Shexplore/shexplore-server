@@ -1,4 +1,4 @@
-# Shexplore Server
+# Shexplore Server - http://shex.herokuapp.com
 
 ## Setup:
     git clone https://github.com/shexplore/shexplore-server.git
