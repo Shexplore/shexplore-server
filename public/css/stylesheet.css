@@ -6,7 +6,7 @@ body *:focus {
 }
 body #body {
   margin-top: 45px;
-  padding: 10px;
+  padding: 0;
 }
 body header .navbar-toggler {
   padding-right: 0;
