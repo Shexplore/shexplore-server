@@ -1,7 +1,10 @@
 'use strict';
-//
-//$('body').addClass('js');
-//$('nav').slideToggle('fast');
-//$('.nav-toggle').click(function() {
-//  $('nav').slideToggle('fast');
-//});
+
+$("#login-submit").click(function () {
+  $("#login-form").submit();
+});
+$('#login-form').keypress(function(e){
+      if (e.which == 13) {
+        $(this).submit();
+      }
+});

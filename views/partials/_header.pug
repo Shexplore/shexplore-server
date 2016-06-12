@@ -1,35 +1,31 @@
-header.navbar.navbar-static-top.bd-navbar.container(role='banner')
-  .clearfix
-    button.navbar-toggler.pull-xs-right.hidden-sm-up(type='button', data-toggle='collapse', data-target='#bd-main-nav') &#9776
-    a.navbar-brand(href='/') Shexplore
-  #bd-main-nav.collapse.navbar-toggleable-xs.pull-sm-right
-    nav.nav.navbar-nav
-      a.nav-item.nav-link(href='/') Home
-      a.nav-item.nav-link(href='/discuss') Discuss
+.clearfix
+  button.navbar-toggler.pull-xs-right.hidden-sm-up(type='button', data-toggle='collapse', data-target='#bd-main-nav') &#9776
+  a.navbar-brand(href='/') Shexplore
+  
+#bd-main-nav.collapse.navbar-toggleable-xs.pull-sm-right
+  nav.nav.navbar-nav
+    a.nav-item.nav-link(href='/') Home
+    a.nav-item.nav-link(href='/discuss') Discuss
 
-      if !username
-        button.btn.btn-secondary(type='button', data-toggle='modal', data-target='#loginModal') Login/Signup
+    if !username
+      button.btn.btn-secondary(type='button', data-toggle='modal', data-target='#login-modal') Login/Signup
 
-        #loginModal.modal.fade(tabindex='-1', aria-hidden='true')
-          .modal-dialog(role='document')
-            .modal-content
+      #login-modal.modal.fade(tabindex='-1', aria-hidden='true')
+        .modal-dialog(role='document')
+          .modal-content(style='width: auto')
               .modal-header
-                button.close(type='button', data-dismiss='modal', aria-label='Close')
-                  span(aria-hidden='true') &#10006;
-                h4.modal-title Modal title
+                h4.modal-title Login
+                button.close(data-dismiss="modal", aria-label="Close")
+                  span(aria-hidden="true") &#10006;
 
               .modal-body
-                form(action='/login/login', method='post')
-                  div
+                form#login-form(action='/login/login', method='post')
+                  fieldset.form-group
                     label(for='username') Username:
-                    input#username(type='text',name='username')
-                  div
+                    input#username.form-control(type='text', name='username')
+                  fieldset.form-group
                     label(for='password') Password:
-                    input#password(type='password',name='password')
-                  div
-                    input(type='submit', value='Submit')
-
+                    input#password.form-control(type='password', name='password')
               .modal-footer
-                button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-
-                button.btn.btn-primary(type='button') Save changes
+                a.btn.btn-link(href='/login/signup') No account? Sign up
+                button#login-submit.btn.btn-primary(type='button') Login
