@@ -1,30 +1,14 @@
-extends layout
+extends ./layout
 
-block content
-
-head
-  title
-  script(type='text/javascript').
-  body
+block body
 
   h1 Create Your Profile
 
   form(action='/profile/update', method='post')
     div
-      label(for='username') Username:
-      input#username(type='text')
-    div
-      label(for='username') favorite_programming_language
-      input#username(type='text')
-    div
-      label(for='username') about_me
-      input#username(type='text')
-    div
-      label(for='username') level
-      input#username(type='text')
-    div
-      label(for='username') projects_completed
-      input#username(type='text')
-    div
-      label(for='username') age
-      input#username(type='text')
+      div Username: #{username}
+    each dat, index in data
+      div
+        span= localization[index]
+        input(type='text',name=index,value=dat)
+    button Update

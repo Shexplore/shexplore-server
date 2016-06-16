@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 
-var bcrypt = require('bcrypt-nodejs');
+var bcrypt = require('bcrypt');
 
 function registerUser(uname,password,email,knex,callback){
   if(password){
@@ -19,9 +19,11 @@ function registerUser(uname,password,email,knex,callback){
         knex.insert({"username":uname}).into('profile').then(function(){
           callback();
         }).catch(function(err){
+          console.log(err);
           callback(err);
         });
       }).catch(function(err){
+        console.log(err);
         callback(err);
       });
     });
@@ -38,7 +40,7 @@ function verifyUser(uname,password,knex,callback){
         knex('users').where({
           id: data.id
         }).update({
-          "verification": ""
+          verification:""
         }).then(function(){
           callback(undefined,undefined,"messages.account.activated");
         });
@@ -58,24 +60,18 @@ router.get('/', function(req, res, next) {
   if(req.session.username){
     res.redirect('/profile');
   }else{
-    res.redirect('login');
+    res.redirect('/login/login');
   }
 });
 
-router.get('/profile', function(req, res, next) {
-  res.render("profile",{username:req.session.username,level:1,badges:[],projects:[]});
-});
-
 router.get('/login', function(req, res, next) {
+  if(req.li){res.redirect('/');return;};
   res.render("login",{username:req.session.username});
 });
 
-router.get('/checkStatus', function(req, res, next) {
-  res.send("username: "+req.session.username);
-});
-
-router.post('/login', function(req, res, next) {
-  verifyUser(req.body.username,req.body.password,req.db,function(err,username,status){
+router.get('/login/:username/:verification', function(req, res, next) {
+  if(req.li){res.redirect('/');return;};
+  verifyUser(req.params.username,req.params.verification,req.db,function(err,username,status){
     if(err){
       console.log(err);
       res.redirect('checkStatus');
@@ -86,7 +82,25 @@ router.post('/login', function(req, res, next) {
   });
 });
 
+router.get('/checkStatus', function(req, res, next) {
+  res.send("username: "+req.session.username);
+});
+
+router.post('/login', function(req, res, next) {
+  req.requireLogin(false);
+  verifyUser(req.body.username,req.body.password,req.db,function(err,username,status){
+    if(err){
+      console.log(err);
+      res.redirect('/login?status='+status);
+      return;
+    }
+    req.session.username = username;
+    res.redirect('/login');
+  });
+});
+
 router.post('/signup', function(req, res, next) {
+  req.requireLogin(false);
   registerUser(req.body.username,req.body.password,req.body.email,req.db,function(err){
     if(err){
       console.log(err);
@@ -97,7 +111,13 @@ router.post('/signup', function(req, res, next) {
 });
 
 router.get('/signup', function(req, res, next) {
+  req.requireLogin(false);
   res.render("signup",{username:req.session.username});
+});
+
+router.post('/logout', function(req, res, next) {
+  req.session.username = undefined;
+  res.redirect('/login/login');
 });
 
 module.exports = router;

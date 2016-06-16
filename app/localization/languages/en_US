@@ -1,1 +1,5 @@
 messages.account.activated=Account Activated. Please sign in.
+messages.login.noAccess=You need to log in to view that page.
+messages.login.notVerified=Please verify your account before logging in.
+edit.failure.generic=Edit failed, please try again
+profile.fields.about_me=About Me

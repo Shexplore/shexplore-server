@@ -23,15 +23,42 @@ var knex = require('knex')({
 
 var session = require('express-session');
 
-var english = new Localization('en_US');
+var langs = {
+  english: new Localization('en_US')
+};
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+
+app.use(session({
+  secret: 'undefined',
+  saveUninitialized:false,
+  resave:false
+}));
 app.use(function(req,res,next){
   req.db = knex;
-  req.localization = english
+  req.localization = langs[req.session.language || "english"];
+  if(!req.session.language)req.session.language = "english"
+
+  req.li = req.session.username === undefined ? false : true;
+
+  req.requireLogin = function(yn){
+    // Usage: res.requireLogin([bool requireLogin = true]);
+    yn = yn === undefined ? true : yn;
+    console.log('checking', req.session.username, yn);
+    if(req.li){
+      if(!yn){ res.redirect('/profile');return true;};
+    }else{
+      if(yn) {res.redirect('/login');return true;};
+    }
+    return false;
+  }
+
+  // Checks if a user is logged in
+  // Usage: if(req.li){res.redirect('/');return;};
+
   next();
 });
 
@@ -44,12 +71,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(session({
-  secret: 'undefined',
-  saveUninitialized:false,
-  resave:false
-}));
 
 app.use('/', routes);
 
