@@ -1,15 +1,16 @@
 extends layout
 
 block body
-  form.container(action='/login/signup', method='post')
-    div
+  h2.m-y-1 Signup
+  form(action='/login/signup', method='post')
+    fieldset.form-group
       label(for='username') Username:
-      input#username(type='text',name='username')
-    div
+      input.form-control#username(type='text',name='username')
+    fieldset.form-group
       label(for='mail') Email:
-      input#email(type='email',name='email')
-    div
+      input.form-control#email(type='email',name='email')
+    fieldset.form-group
       label(for='password') Password:
-      input#password(type='password',name='password')
-    div
-      input(type='submit', value='Submit')
+      input.form-control#password(type='password',name='password')
+    fieldset.form-group
+      button.btn.btn-primary.pull-xs-right(type='submit') Submit

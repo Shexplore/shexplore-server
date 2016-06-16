@@ -1,57 +1,66 @@
 body
   font-family 'Exo 2', "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif
-
+  
+  *:focus
+    outline none
+    
   #body
-    margin-top 70px
-    padding 10px
+    margin-top 45px
+    padding 0
   
   header
-//    display flex
-    align-items center
+    .navbar-toggler
+      padding-right 0
+      padding-left 0
+
     a
       color inherit
       
-    .navbar-toggler
-      padding-right 0
-      
     nav
-      a
-        margin 5px 0
-        border-bottom 1px #ddd solid
+      > a:first-child
+        margin-top .425rem
         
-      a.nav-toggle
-        font-size 1.3em
-        -webkit-touch-callout none
-        -webkit-user-select none
-        -khtml-user-select none
-        -moz-user-select none
-        -ms-user-select none
-        user-select none
+      > a
+        margin-left 0 !important
+        border-top 1px #ddd solid
+        
+      a,
+      button
+        display block
+        width 100%
+     
+    .modal-header
+      display flex
+      
+      h4
+        margin-right auto
+      
+      button
+        width auto
 
-        &:hover
-          text-decoration none
-          cursor pointer
-          
-    .bd-navbar .nav-link
-      float none
-
-    .bd-navbar .nav-link + .nav-link
-      margin-left 0
       
   .modal-backdrop
     z-index 2
-
-.js
-  nav
-    display none
     
 @media screen and (min-width: 34em)
+  .modal-dialog
+    width 90%
+    
   header
+    nav
+      display flex
+      width auto
+      
+      a
+        margin-top 0 !important
+        border none !important
+      
+      .btn
+        width auto
+      
     > .clearfix
       display inline-block
     
     nav
-      display flex
-  
       a
-        margin 0 20px
+        margin auto 20px
