@@ -10,7 +10,7 @@ exports.up = function(knex, Promise) {
     }),
     knex.schema.createTableIfNotExists('profile', function(table) {
       table.increments('id').primary();
-      table.string('username');
+      table.string('username').notNullable().unique();
       table.string('favorite_programming_language');
       table.string('about_me')
       table.integer('level')

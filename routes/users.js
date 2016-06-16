@@ -8,7 +8,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:user',function(req,res,next){
-  res.send('this page will contain information about '+req.params.user+" once it exists");
+  knex('profile').where({
+    username: uname
+  }).where({'username':req.params.user}).fetch().then(function(dat){
+    res.send(dat[0]);
+  });
 });
 
 module.exports = router;

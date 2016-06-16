@@ -16,7 +16,11 @@ function registerUser(uname,password,email,knex,callback){
         return;
       }
       knex.insert({"username":uname,"password":hash,"email":email,"verification":verification}).into('users').then(function(){
-        callback();
+        knex.insert({"username":uname}).into('profile').then(function(){
+          callback();
+        }).catch(function(err){
+          callback(err);
+        });
       }).catch(function(err){
         callback(err);
       });
@@ -54,7 +58,7 @@ router.get('/', function(req, res, next) {
   if(req.session.username){
     res.redirect('/profile');
   }else{
-    res.redirect('/login');
+    res.redirect('login');
   }
 });
 
@@ -74,11 +78,11 @@ router.post('/login', function(req, res, next) {
   verifyUser(req.body.username,req.body.password,req.db,function(err,username,status){
     if(err){
       console.log(err);
-      res.redirect('/users/checkStatus');
+      res.redirect('checkStatus');
       return;
     }
     req.session.username = username;
-    res.redirect('/users/checkStatus');
+    res.redirect('checkStatus');
   });
 });
 
@@ -88,7 +92,7 @@ router.post('/signup', function(req, res, next) {
       console.log(err);
       return;
     }
-    res.redirect("/users/login");
+    res.redirect("login");
   });
 });
 

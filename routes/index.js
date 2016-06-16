@@ -17,5 +17,6 @@ router.use('/discuss', require('./discuss'))
 
 router.use('/login', require('./login'));
 router.use('/users', require('./users'));
+router.use('/profile', require('./profile'));
 
 module.exports = router;
