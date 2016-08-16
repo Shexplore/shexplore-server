@@ -101,7 +101,6 @@ router.post('/login', function(req, res, next) {
   verifyUser(req.body.username,req.body.password,req.db,function(err,username,status){
     if(err){
       console.log(err);
-      res.status(500); // THIS LINE MIGHT CRASH THINGS, IF IT DOES, REMOVE IT
       res.redirect('/login?status='+status); // fix security, don't add status
       return;
     }
