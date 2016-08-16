@@ -8,7 +8,18 @@ block body
     div
       div Username: #{username}
     each dat, index in data
-      div
-        span= localization[index]
-        input(type='text',name=index,value=dat)
+      case dat.type
+        when "text"
+          div
+            span= localization[index]
+            input(type='text',name=index,value=dat.val)
+        when "textarea"
+          div
+            span= localization[index]
+            textarea(name=index)= dat.val
+        default
+          div
+            span= localization[index]
+            span This should be a #{dat.type} selector, but isn't yet
+            input(type='text',name=index,value=dat.val)
     button Update

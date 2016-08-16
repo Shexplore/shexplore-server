@@ -35,6 +35,7 @@ function verifyUser(uname,password,knex,callback){
     username: uname
   }).select('id','verification','password').then(function(dat){
     var data = dat[0]
+    console.log(dat);
     if(data.verification != ""){
       if(data.verification == password){
         knex('users').where({
@@ -42,12 +43,21 @@ function verifyUser(uname,password,knex,callback){
         }).update({
           verification:""
         }).then(function(){
-          callback(undefined,undefined,"messages.account.activated");
+          callback(new Error("account activated"),undefined,"messages.account.activated");
         });
       }
     }else{
       bcrypt.compare(password,data.password,function(err,res){
-        callback(err,res ? uname : undefined,undefined);
+        if(err){
+          console.log(err);
+          callback(err,undefined,"messages.login.failure.generic");
+          return;
+        }
+        if(res){
+          callback(undefined,uname,undefined);
+        }else{
+          callback(undefined,undefined,"messages.login.failure.passwordIncorrect");
+        }
       });
     }
   });
@@ -91,7 +101,12 @@ router.post('/login', function(req, res, next) {
   verifyUser(req.body.username,req.body.password,req.db,function(err,username,status){
     if(err){
       console.log(err);
-      res.redirect('/login?status='+status);
+      res.status(500); // THIS LINE MIGHT CRASH THINGS, IF IT DOES, REMOVE IT
+      res.redirect('/login?status='+status); // fix security, don't add status
+      return;
+    }
+    if(status){
+      res.redirect('login?status='+status);
       return;
     }
     req.session.username = username;

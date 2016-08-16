@@ -1,5 +1,16 @@
 messages.account.activated=Account Activated. Please sign in.
 messages.login.noAccess=You need to log in to view that page.
-messages.login.notVerified=Please verify your account before logging in.
+messages.login.failure.notVerified=Please verify your account before logging in.
+messages.login.failure.generic=An error occurred while trying to log you in
+messages.login.failure.passwordIncorrect=Your password is incorrect
 edit.failure.generic=Edit failed, please try again
+
+profile.fields.favorite_programming_language=Favorite Programming Language
 profile.fields.about_me=About Me
+profile.fields.location=Location
+profile.fields.age=Age
+profile.fields.real_name=Real Name
+profile.fields.friends=Friends
+profile.fields.profile_picture=Profile Picture
+profile.fields.hobbies=Hobbies
+profile.fields.company=Company
